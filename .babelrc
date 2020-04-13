@@ -3,7 +3,7 @@
     "@babel/env"
   ],
   "plugins": [
-    ["@babel/plugin-transform-react-jsx", {"pragma":"createElement"}]
+    ["@babel/plugin-transform-react-jsx", {"pragma":"jsxRenderer"}]
   ],
   "comments": false
 }

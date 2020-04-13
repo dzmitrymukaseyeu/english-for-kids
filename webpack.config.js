@@ -39,12 +39,12 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      jsxRenderer: [`${__dirname}/src/app/utils/jsx-renderer.js`, 'default'],
+    }),
     new HtmlWebpackPlugin({
       template: `${__dirname}/src/public/index.html`,
       inject: 'body',
-    }),
-    new webpack.ProvidePlugin({
-      __extends: './jsx-renderer.js',
     }),
   ],
   devServer: {

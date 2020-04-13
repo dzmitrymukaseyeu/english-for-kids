@@ -1,6 +1,6 @@
 // https://itnext.io/lessons-learned-using-jsx-without-react-bbddb6c28561
 
-function createElement(tag, attrs, ...children) {
+function jsxRenderer(tag, attrs, ...children) {
   // Custom Components will be functions
   if (typeof tag === 'function') { return tag(); }
   // regular html tags will be strings to create the elements
@@ -28,4 +28,4 @@ function createElement(tag, attrs, ...children) {
   return 'unrecognized type';
 }
 
-export default createElement;
+export default jsxRenderer;
