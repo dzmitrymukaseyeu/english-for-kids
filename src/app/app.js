@@ -1,5 +1,8 @@
 import '../style/style.scss';
+import NavBarView from './views/navbar-view';
 
-const render = () => <div className="btn btn-primary">123</div>;
+let view = new NavBarView();
 
-document.body.appendChild(render());
+// const render = () => <div className="btn btn-primary">123</div>;
+
+document.body.appendChild(view.view);

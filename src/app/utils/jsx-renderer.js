@@ -22,6 +22,7 @@ function jsxRenderer(tag, attrs, ...children) {
     element.appendChild(fragments);
     // Merge element with attributes
     Object.assign(element, attrs);
+
     return element;
   }
 
