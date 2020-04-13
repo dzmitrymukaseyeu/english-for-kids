@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   entry: `${__dirname}/src/app/app.js`,
@@ -7,6 +8,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '',
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -40,6 +42,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: `${__dirname}/src/public/index.html`,
       inject: 'body',
+    }),
+    new webpack.ProvidePlugin({
+      __extends: './jsx-renderer.js',
     }),
   ],
   devServer: {

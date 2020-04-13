@@ -1,6 +1,6 @@
+import createElement from './utils/jsx-renderer';
 import '../style/style.scss';
 
-
-const render = () => <div className="greating">Hello, world!</div>;
+const render = () => <div className="btn btn-primary">123</div>;
 
 document.body.appendChild(render());
