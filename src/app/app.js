@@ -1,8 +1,8 @@
 import '../style/style.scss';
-import NavBarView from './views/navbar-view';
+import PageRenderer from './components/page-renderer';
+import MasterPage from './pages/master-page';
 
-let view = new NavBarView();
-
-// const render = () => <div className="btn btn-primary">123</div>;
-
-document.body.appendChild(view.view);
+const renderer = new PageRenderer();
+const masterPage = new MasterPage();
+masterPage.render();
+renderer.renderPage(masterPage);
