@@ -8,7 +8,7 @@ class NotFoundPage extends MasterPage {
 
   render() {
     this.root.push(
-      <div>Hello, notFound page</div>,
+      <div className="page-content">Hello, notFound page</div>,
     );
   }
 }

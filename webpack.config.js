@@ -33,8 +33,10 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader'],
+        test: /\.(png|jpe?g|gif|svg)$/,
+        use: {
+          loader: 'file-loader',
+        },
       },
     ],
   },

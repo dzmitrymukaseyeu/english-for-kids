@@ -1,5 +1,4 @@
 import Component from '../specification/component';
-import HomePage from '../pages/home-page';
 import CategoriesPage from '../pages/categories-page';
 import NotFoundPage from '../pages/notfound-page';
 
@@ -11,7 +10,6 @@ class PageRenderer extends Component {
 
   createComponent() {
     this.pages = [
-      new HomePage(),
       new CategoriesPage(),
     ];
 
@@ -47,7 +45,7 @@ class PageRenderer extends Component {
       document.body.removeChild(container);
     }
 
-    this.root = <div class="container-fluid"></div>;
+    this.root = <div></div>;
     document.body.appendChild(this.root);
 
     page.root.forEach((p) => {
