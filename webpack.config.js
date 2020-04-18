@@ -49,6 +49,7 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       jsxRenderer: [`${__dirname}/src/app/utils/jsx-renderer.js`, 'default'],
+      importAll: [`${__dirname}/src/app/utils/all-import.js`, 'default'],
     }),
     new HtmlWebpackPlugin({
       template: `${__dirname}/src/public/index.html`,

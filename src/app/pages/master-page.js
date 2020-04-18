@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 import Page from '../specification/page';
 import NavBarComponent from '../components/navbar-component';
 
 class MasterPage extends Page {
   static staticInit() {
     if (!this.NavBarComponent) {
-      this.NavBarComponent = new NavBarComponent().root;
+      this.NavBarComponent = new NavBarComponent();
     }
   }
 
@@ -12,10 +13,13 @@ class MasterPage extends Page {
     MasterPage.staticInit();
     super(hash, isStartPage);
     super.render();
+
+    this.images = importAll(require.context('../../public/images', false, /\.(png|jpe?g|svg)$/));
+    this.sounds = importAll(require.context('../../public/audio', false, /\.(mp3)$/));
   }
 
   render() {
-    this.root.push(MasterPage.NavBarComponent);
+    this.root.push(MasterPage.NavBarComponent.root);
   }
 }
 

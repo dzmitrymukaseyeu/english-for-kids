@@ -14,29 +14,32 @@ class CardComponent extends Component {
   createComponent() {
     this.sound = new Audio(this.sound);
 
-    const image = <div className="card-image"></div>;
+    const image = <div className="flip-card__image"></div>;
+
     image.style.backgroundImage = `url('${this.image}')`;
-    const rotate = <div>
+
+    const rotateIcon = <div>
       <span className="fas fa-sync" style="font-size:18px;"></span>
       </div>;
-    const text = <div className="card-text"></div>;
+
+    const text = <div className="flip-card__text"></div>;
+
     text.innerText = this.name;
-    text.appendChild(rotate);
+    text.style.zIndex = '9999';
+    text.appendChild(rotateIcon);
 
-    this.root = <div className="card"></div>;
+    this.root = <div className="flip-card"></div>;
 
-    this.root.appendChild(image);
-    this.root.appendChild(text);
+    const frontSide = <div className="front"></div>;
+    const backSide = <div className="back"></div>;
 
-    rotate.onclick = () => {
-      text.innerText = this.translate;
-      this.root.onmouseout = () => {
-        text.innerText = this.name;
-        text.appendChild(rotate);
-      };
-    };
+    frontSide.appendChild(image);
+    frontSide.appendChild(text);
 
-    this.root.onclick = () => {
+    this.root.appendChild(frontSide);
+    this.root.appendChild(backSide);
+
+    image.onclick = () => {
       this.sound.play();
     };
   }

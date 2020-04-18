@@ -1,5 +1,5 @@
 import Component from '../specification/component';
-import NavBarMenuItem from './navbar-menuitem';
+import NavBarMenuItem from './navbar-menuitem-component';
 
 class NavBarComponent extends Component {
   constructor() {
@@ -21,6 +21,11 @@ class NavBarComponent extends Component {
     ];
 
     this.createComponent();
+  }
+
+  activateMenuItem(hash) {
+    const item = this.menuItems.find((p) => p.hash === hash);
+    item.makeActive();
   }
 
   createComponent() {
@@ -57,9 +62,7 @@ class NavBarComponent extends Component {
     </div>;
 
     this.menuItems.forEach((item) => {
-      const button = <span className="button"><i className={item.iconClassName} style="padding-right:5px;"></i>{item.name}</span>;
-      button.onclick = item.onclick;
-      this.menuContent.appendChild(button);
+      this.menuContent.appendChild(item.root);
     });
 
     this.menu.appendChild(this.menuContent);
