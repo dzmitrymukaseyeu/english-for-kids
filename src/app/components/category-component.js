@@ -26,6 +26,14 @@ class CategoryComponent extends Component {
       window.location.hash = this.hash;
       MasterPage.NavBarComponent.activateMenuItem(this.hash);
     };
+
+    window.addEventListener('gameMode', () => {
+      this.root.style.border = '5px solid rgb(255, 176, 130)';
+    });
+
+    window.addEventListener('trainMode', () => {
+      this.root.style.border = '';
+    });
   }
 }
 

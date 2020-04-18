@@ -55,6 +55,18 @@ class CardComponent extends Component {
     image.onclick = () => {
       this.sound.play();
     };
+
+    window.addEventListener('gameMode', () => {
+      text.style.visibility = 'hidden';
+      image.style.height = '100%';
+      image.onclick = null;
+    });
+
+    window.addEventListener('trainMode', () => {
+      text.style.visibility = 'visible';
+      image.style.height = '80%';
+      image.onclick = () => { this.sound.play(); };
+    });
   }
 }
 

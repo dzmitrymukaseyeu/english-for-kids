@@ -101,12 +101,22 @@ class NavBarComponent extends Component {
   }
 
   createToggleSwitch() {
-    this.toggleSwitch = <div className="toggle-switch"><span className="toggle-switch__mode-text">Game Enabled:</span>
-      <label className="toggle-area">
-        <input type="checkbox"></input>
-          <div className="switch"></div>
-      </label>
-    </div>;
+    this.toggleSwitch = <div className="toggle-switch"><span className="toggle-switch__mode-text">Game Enabled:</span></div>;
+    const toggleArea = <label className="toggle-area"></label>;
+    const input = <input type="checkbox"></input>;
+    const switchElement = <div className="switch"></div>;
+
+    input.onchange = () => {
+      if (input.checked) {
+        window.dispatchEvent(new Event('gameMode'));
+      } else {
+        window.dispatchEvent(new Event('trainMode'));
+      }
+    };
+
+    this.toggleSwitch.appendChild(toggleArea);
+    toggleArea.appendChild(input);
+    toggleArea.appendChild(switchElement);
   }
 }
 
