@@ -28,6 +28,20 @@ class NavBarComponent extends Component {
     item.makeActive();
   }
 
+  hideSidebar() {
+    if (this.menuContent.classList.contains('sidebar__menu--hide')) {
+      this.menuContent.classList.remove('sidebar__menu--hide');
+      this.menuContent.classList.add('sidebar__menu--show');
+    } else {
+      this.menuContent.classList.remove('sidebar__menu--show');
+      this.menuContent.classList.add('sidebar__menu--hide');
+    }
+
+    this.menuContent.addEventListener('animationend', () => {
+      this.menuContent.classList.remove('sidebar__menu--show');
+    });
+  }
+
   createComponent() {
     // create elements
     this.createNavBar();
@@ -37,17 +51,19 @@ class NavBarComponent extends Component {
 
     // add onclick handler
     this.expandButton.onclick = () => {
-      if (this.menuContent.classList.contains('sidebar__menu--hide')) {
-        this.menuContent.classList.remove('sidebar__menu--hide');
-        this.menuContent.classList.add('sidebar__menu--show');
-      } else {
+      this.hideSidebar();
+    };
+
+    document.onclick = (e) => {
+      if (
+        (
+          e.target.classList.length > 0
+          && e.target.classList.contains('fa-bars') === false
+          && e.target.classList.contains('header__menu-button') === false)
+          && e.target.classList.contains('button') === false) {
         this.menuContent.classList.remove('sidebar__menu--show');
         this.menuContent.classList.add('sidebar__menu--hide');
       }
-
-      this.menuContent.addEventListener('animationend', () => {
-        this.menuContent.classList.remove('sidebar__menu--show');
-      });
     };
 
     // create root component
