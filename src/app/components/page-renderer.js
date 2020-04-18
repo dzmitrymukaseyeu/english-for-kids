@@ -55,7 +55,7 @@ class PageRenderer extends Component {
       document.body.removeChild(container);
     }
 
-    this.root = <div></div>;
+    this.root = <div className="app-container"></div>;
     document.body.appendChild(this.root);
 
     page.root.forEach((p) => {

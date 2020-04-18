@@ -20,24 +20,37 @@ class CardComponent extends Component {
 
     const rotateIcon = <div>
       <span className="fas fa-sync" style="font-size:18px;"></span>
-      </div>;
+    </div>;
 
     const text = <div className="flip-card__text"></div>;
 
     text.innerText = this.name;
-    text.style.zIndex = '9999';
     text.appendChild(rotateIcon);
 
     this.root = <div className="flip-card"></div>;
 
-    const frontSide = <div className="front"></div>;
-    const backSide = <div className="back"></div>;
+    const flipper = <div className="flip-card__flipper"></div>;
+
+    const frontSide = <div className="flip-card__front"></div>;
+    const backSide = <div className="flip-card__back">
+      <div className="flip-card__text">{this.translate}</div>
+    </div>;
 
     frontSide.appendChild(image);
     frontSide.appendChild(text);
 
-    this.root.appendChild(frontSide);
-    this.root.appendChild(backSide);
+    flipper.appendChild(frontSide);
+    flipper.appendChild(backSide);
+
+    this.root.appendChild(flipper);
+
+    rotateIcon.onclick = () => {
+      flipper.classList.add('flip-card--rotate');
+      backSide.onmouseout = () => {
+        flipper.classList.remove('flip-card--rotate');
+      };
+    };
+
 
     image.onclick = () => {
       this.sound.play();

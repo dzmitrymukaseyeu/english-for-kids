@@ -33,6 +33,7 @@ class NavBarComponent extends Component {
     this.createNavBar();
     this.createExpandButton();
     this.createMenu();
+    this.createToggleSwitch();
 
     // add onclick handler
     this.expandButton.onclick = () => {
@@ -51,6 +52,7 @@ class NavBarComponent extends Component {
 
     // create root component
     this.header.appendChild(this.expandButton);
+    this.header.appendChild(this.toggleSwitch);
     this.header.appendChild(<div className="header__logo"></div>);
     this.root.appendChild(this.menu);
   }
@@ -79,6 +81,15 @@ class NavBarComponent extends Component {
   createExpandButton() {
     this.expandButton = <div className="header__menu-button">
       <span className="fas fa-bars"></span>
+    </div>;
+  }
+
+  createToggleSwitch() {
+    this.toggleSwitch = <div className="toggle-switch"><span className="toggle-switch__mode-text">Game Enabled:</span>
+      <label className="toggle-area">
+        <input type="checkbox"></input>
+          <div className="switch"></div>
+      </label>
     </div>;
   }
 }
