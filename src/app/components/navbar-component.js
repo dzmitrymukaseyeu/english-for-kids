@@ -8,14 +8,14 @@ class NavBarComponent extends Component {
     this.menuItems = [
       new NavBarMenuItem('Categories', 'categories', 'fas fa-list-ol'),
 
-      new NavBarMenuItem('Action (set A)', 'categories', 'fas fa-play'),
-      new NavBarMenuItem('Action (set B)', 'categories', 'fas fa-play'),
-      new NavBarMenuItem('Action (set C)', 'categories', 'fas fa-play'),
-      new NavBarMenuItem('Adjective', 'categories', 'fas fa-play'),
-      new NavBarMenuItem('Animal (set A)', 'categories', 'fas fa-play'),
-      new NavBarMenuItem('Animal (set B)', 'categories', 'fas fa-play'),
-      new NavBarMenuItem('Clothes', 'categories', 'fas fa-play'),
-      new NavBarMenuItem('Emotion', 'categories', 'fas fa-play'),
+      new NavBarMenuItem('Action (set A)', 'actionA', 'fas fa-play'),
+      new NavBarMenuItem('Action (set B)', 'actionB', 'fas fa-play'),
+      new NavBarMenuItem('Action (set C)', 'actionC', 'fas fa-play'),
+      new NavBarMenuItem('Adjective', 'adjective', 'fas fa-play'),
+      new NavBarMenuItem('Animal (set A)', 'animalA', 'fas fa-play'),
+      new NavBarMenuItem('Animal (set B)', 'animalB', 'fas fa-play'),
+      new NavBarMenuItem('Clothes', 'clothes', 'fas fa-play'),
+      new NavBarMenuItem('Emotion', 'emotion', 'fas fa-play'),
 
       new NavBarMenuItem('Statistics', 'statistics', 'fas fa-address-card'),
     ];

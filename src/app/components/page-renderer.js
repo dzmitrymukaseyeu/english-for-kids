@@ -1,6 +1,8 @@
 import Component from '../specification/component';
 import CategoriesPage from '../pages/categories-page';
 import NotFoundPage from '../pages/notfound-page';
+import CardsPage from '../pages/cards-page';
+import Dictionary from '../dictionaries/dictionary';
 
 class PageRenderer extends Component {
   constructor() {
@@ -11,6 +13,14 @@ class PageRenderer extends Component {
   createComponent() {
     this.pages = [
       new CategoriesPage(),
+      new CardsPage('actionA', Dictionary.setA),
+      new CardsPage('actionB', Dictionary.setB),
+      new CardsPage('actionC', Dictionary.setС),
+      new CardsPage('adjective', Dictionary.adjective),
+      new CardsPage('animalA', Dictionary.animalA),
+      new CardsPage('animalB', Dictionary.animalB),
+      new CardsPage('clothes', Dictionary.clothes),
+      new CardsPage('emotion', Dictionary.emotion),
     ];
 
     // service page

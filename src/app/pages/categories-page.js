@@ -1,7 +1,7 @@
 import MasterPage from './master-page';
 import CategoryComponent from '../components/category-component';
 
-class HomePage extends MasterPage {
+class CategoriesPage extends MasterPage {
   constructor() {
     super('#categories', true);
 
@@ -14,14 +14,14 @@ class HomePage extends MasterPage {
     const images = importAll(require.context('../../public/images', false, /\.(png|jpe?g|svg)$/));
 
     this.categiries = [
-      new CategoryComponent('Action (set A)', images['dance.jpg']),
-      new CategoryComponent('Action (set B)', images['swim.jpg']),
-      new CategoryComponent('Action (set C)', images['drop.jpg']),
-      new CategoryComponent('Adjective', images['friendly.jpg']),
-      new CategoryComponent('Animal (set A)', images['cat.jpg']),
-      new CategoryComponent('Animal (set B)', images['bird.jpg']),
-      new CategoryComponent('Clothes', images['blouse.jpg']),
-      new CategoryComponent('Emotion', images['smile.jpg']),
+      new CategoryComponent('Action (set A)', 'actionA', images['dance.jpg']),
+      new CategoryComponent('Action (set B)', 'actionB', images['swim.jpg']),
+      new CategoryComponent('Action (set C)', 'actionC', images['drop.jpg']),
+      new CategoryComponent('Adjective', 'adjective', images['friendly.jpg']),
+      new CategoryComponent('Animal (set A)', 'animalA', images['cat.jpg']),
+      new CategoryComponent('Animal (set B)', 'animalB', images['bird.jpg']),
+      new CategoryComponent('Clothes', 'clothes', images['blouse.jpg']),
+      new CategoryComponent('Emotion', 'emotion', images['smile.jpg']),
     ];
 
     super.render();
@@ -39,4 +39,4 @@ class HomePage extends MasterPage {
   }
 }
 
-export default HomePage;
+export default CategoriesPage;

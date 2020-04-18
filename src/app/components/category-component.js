@@ -1,10 +1,11 @@
 import Component from '../specification/component';
 
 class CategoryComponent extends Component {
-  constructor(name, image) {
+  constructor(name, hash, image) {
     super();
     this.name = name;
     this.image = image;
+    this.hash = hash;
     this.createComponent();
   }
 
@@ -18,6 +19,11 @@ class CategoryComponent extends Component {
 
     this.root.appendChild(image);
     this.root.appendChild(text);
+
+    this.root.onclick = () => {
+      window.history.pushState(this.hash, this.name, '');
+      window.location.hash = this.hash;
+    };
   }
 }
 
