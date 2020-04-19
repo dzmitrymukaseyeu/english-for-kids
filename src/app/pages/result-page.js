@@ -7,17 +7,20 @@ class ResultPage extends MasterPage {
     super.render();
   }
 
+  openHomePage() {
+    window.history.pushState('#categories', 'categories', '');
+    window.location.hash = '#categories';
+    MasterPage.NavBarComponent.activateMenuItem(this.hash);
+    localStorage.removeItem('errorCount');
+  }
+
   render() {
     const button = <div className="result-page__button">Ok</div>;
     button.onclick = () => {
-      window.history.pushState('#categories', 'categories', '');
-      window.location.hash = '#categories';
-      MasterPage.NavBarComponent.activateMenuItem(this.hash);
-      localStorage.removeItem('errorCount');
+      this.openHomePage();
     };
 
     this.errorCounter = <div className='result-page__error-counter'></div>;
-
 
     this.root.push(
         <div className="result-page">
@@ -33,6 +36,11 @@ class ResultPage extends MasterPage {
     if (errors) {
       this.errorCounter.innerText = `Ошибок:${errors}`;
     }
+
+    const redirectTimeout = window.setTimeout(() => {
+      this.openHomePage();
+      window.clearTimeout(redirectTimeout);
+    }, 2000);
   }
 }
 
