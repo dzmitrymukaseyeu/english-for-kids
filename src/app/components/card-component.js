@@ -55,6 +55,10 @@ class CardComponent extends Component {
       backSide.onmouseout = () => {
         flipper.classList.remove('flip-card--rotate');
       };
+
+      backSide.ontouchstart = () => {
+        flipper.classList.remove('flip-card--rotate');
+      };
     };
 
 

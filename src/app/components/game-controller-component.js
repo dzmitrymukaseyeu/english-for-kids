@@ -58,6 +58,7 @@ class GameControllerComponent extends Component {
   }
 
   createGameSession() {
+    this.errorCount = 0;
 
     window.dispatchEvent(new Event('cardResetEvent'));
 
