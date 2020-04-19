@@ -3,6 +3,7 @@ import CategoriesPage from '../pages/categories-page';
 import NotFoundPage from '../pages/notfound-page';
 import CardsPage from '../pages/cards-page';
 import Dictionary from '../dictionaries/dictionary';
+import ResultPage from '../pages/result-page';
 
 class PageRenderer extends Component {
   constructor() {
@@ -21,6 +22,8 @@ class PageRenderer extends Component {
       new CardsPage('animalB', Dictionary.animalB),
       new CardsPage('clothes', Dictionary.clothes),
       new CardsPage('emotion', Dictionary.emotion),
+      new ResultPage('success', 'result-page__image-success'),
+      new ResultPage('failure', 'result-page__image-failure'),
     ];
 
     // service page
@@ -49,6 +52,8 @@ class PageRenderer extends Component {
   }
 
   renderPage(page) {
+    page.preInitialize();
+
     const container = Array.from(document.body.children).find((p) => p.localName === 'div');
 
     if (container) {

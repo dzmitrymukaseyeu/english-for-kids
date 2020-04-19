@@ -1,14 +1,20 @@
 import Component from '../specification/component';
 
 class CardComponent extends Component {
-  constructor(name, image, translate, sound) {
+  constructor(name, image, translate, sound, hash) {
     super();
     this.name = name;
     this.image = image;
     this.translate = translate;
     this.sound = sound;
+    this.hash = hash;
 
     this.createComponent();
+  }
+
+  reset() {
+    this.root.classList.remove('flip-card--success');
+    this.root.classList.remove('flip-card--error');
   }
 
   createComponent() {
@@ -56,16 +62,57 @@ class CardComponent extends Component {
       this.sound.play();
     };
 
+    window.addEventListener('trueAnswerEvent', (e) => {
+      if (!e.detail) {
+        return;
+      }
+
+      if (e.detail.hash === this.hash
+        && e.detail.name === this.name) {
+        this.root.classList.add('flip-card--success');
+      }
+    });
+
+    window.addEventListener('falseAnswerEvent', (e) => {
+      if (!e.detail) {
+        return;
+      }
+
+      if (e.detail.hash === this.hash
+        && e.detail.name === this.name) {
+        this.root.classList.add('flip-card--error');
+      }
+    });
+
     window.addEventListener('gameMode', () => {
       text.style.visibility = 'hidden';
       image.style.height = '100%';
-      image.onclick = null;
+
+      image.onclick = () => {
+        window.dispatchEvent(new CustomEvent('createResponse', {
+          detail: {
+            hash: this.hash,
+            name: this.name,
+          },
+        }));
+      };
     });
 
     window.addEventListener('trainMode', () => {
+      this.reset();
       text.style.visibility = 'visible';
       image.style.height = '80%';
       image.onclick = () => { this.sound.play(); };
+    });
+
+    window.addEventListener('playSound', (e) => {
+      if (e.detail === this.name) {
+        this.sound.play();
+      }
+    });
+
+    window.addEventListener('cardResetEvent', () => {
+      this.reset();
     });
   }
 }

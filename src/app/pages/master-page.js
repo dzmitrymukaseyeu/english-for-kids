@@ -16,6 +16,12 @@ class MasterPage extends Page {
 
     this.images = importAll(require.context('../../public/images', false, /\.(png|jpe?g|svg)$/));
     this.sounds = importAll(require.context('../../public/audio', false, /\.(mp3)$/));
+
+    window.addEventListener('gameMode', () => {
+    });
+
+    window.addEventListener('trainMode', () => {
+    });
   }
 
   render() {

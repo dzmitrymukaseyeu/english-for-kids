@@ -1,0 +1,33 @@
+.score-bar 
+{
+  width:100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+
+  &.score-bar--visible
+  {
+    height: 50px;
+    display: flex;
+  }
+
+  &.score-bar--hide
+  {
+    height: 0px;
+    opacity: 0;
+    display: flex;
+  }
+
+  .score-bar__result
+  {
+    width:310px;
+    height: 31px;
+    display:flex;
+    justify-content: center;
+    font-size: 31px;
+    color:$orange-font-color;
+    padding:5px;
+    border-radius: 5px;
+  } 
+}

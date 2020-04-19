@@ -1,0 +1,56 @@
+//switch toggle
+
+$width: 50px;
+$padding: 7px;
+$height: $width / 2 + $padding;
+
+.toggle-switch {
+   display: flex;
+   align-items: center;
+  //toggle code begins!
+  .toggle-area {
+    box-sizing: border-box;
+    cursor: pointer;
+    background: #4c9af3;
+    padding: $padding;
+    width: $width;
+    height: $height;
+    border-radius: $height / 2;
+    input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+  }
+
+  .toggle-switch__mode-text
+  {
+    padding-right: 10px;
+    font-size:24px;
+    font-weight:bold;
+  }
+
+  .switch {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 0fr 1fr 1fr;
+    transition: 0.2s;
+    //ICYMI, pseudo elements are treated as grid items
+    &::after {
+      content: "";
+      border-radius: 50%;
+      background: rgb(9, 198, 255);
+      grid-column: 2;
+      transition: background 0.2s;
+    }
+  }
+  input:checked {
+    + .switch {
+      grid-template-columns: 1fr 1fr 0fr;
+      &::after {
+        background-color: #52cf71;
+      }
+    }
+  }
+}

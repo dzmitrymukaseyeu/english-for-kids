@@ -1,4 +1,10 @@
-// @import "~bootswatch/dist/materia/variables";
-// @import "~bootstrap/scss/bootstrap";
-// @import "~bootswatch/dist/materia/bootswatch";
-@import "custom";
+@import "colors";
+@import "header-toggle-switch";
+@import "header";
+@import "sidebar";
+@import "category-card";
+@import "flip-card";
+@import "page-content";
+@import "score-bar";
+@import "game-bar";
+@import "result-page";

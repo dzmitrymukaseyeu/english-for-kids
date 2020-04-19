@@ -1,4 +1,5 @@
 import Component from '../specification/component';
+// eslint-disable-next-line import/no-cycle
 import NavBarMenuItem from './navbar-menuitem-component';
 
 class NavBarComponent extends Component {
@@ -25,10 +26,12 @@ class NavBarComponent extends Component {
 
   activateMenuItem(hash) {
     const item = this.menuItems.find((p) => p.hash === hash);
-    item.makeActive();
+    if (item) {
+      item.makeActive();
+    }
   }
 
-  hideSidebar() {
+  toggleSidebar() {
     if (this.menuContent.classList.contains('sidebar__menu--hide')) {
       this.menuContent.classList.remove('sidebar__menu--hide');
       this.menuContent.classList.add('sidebar__menu--show');
@@ -49,20 +52,17 @@ class NavBarComponent extends Component {
     this.createMenu();
     this.createToggleSwitch();
 
-    // add onclick handler
-    this.expandButton.onclick = () => {
-      this.hideSidebar();
-    };
-
     document.onclick = (e) => {
       if (
         (
           e.target.classList.length > 0
-          && e.target.classList.contains('fa-bars') === false
-          && e.target.classList.contains('header__menu-button') === false)
-          && e.target.classList.contains('button') === false) {
+          && e.target.classList.contains('menu__toggle') === false
+          && e.target.classList.contains('menu__btn') === false
+          && e.target.classList.contains('hamburger-menu') === false)
+      ) {
         this.menuContent.classList.remove('sidebar__menu--show');
         this.menuContent.classList.add('sidebar__menu--hide');
+        this.expandButtonToggle.checked = false;
       }
     };
 
@@ -95,9 +95,21 @@ class NavBarComponent extends Component {
   }
 
   createExpandButton() {
-    this.expandButton = <div className="header__menu-button">
-      <span className="fas fa-bars"></span>
-    </div>;
+    this.expandButton = <div className="hamburger-menu"></div>;
+
+    this.expandButtonToggle = <input id="menu__toggle" type="checkbox"></input>;
+
+    this.expandButtonToggle.onchange = () => {
+      this.toggleSidebar();
+    };
+
+    const label = <label className="menu__btn"></label>;
+
+    label.setAttribute('for', 'menu__toggle');
+    label.appendChild(<span></span>);
+
+    this.expandButton.appendChild(this.expandButtonToggle);
+    this.expandButton.appendChild(label);
   }
 
   createToggleSwitch() {

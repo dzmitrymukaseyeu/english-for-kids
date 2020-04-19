@@ -1,6 +1,4 @@
 import Component from '../specification/component';
-// eslint-disable-next-line import/no-cycle
-import MasterPage from '../pages/master-page';
 
 class NavBarMenuItemComponent extends Component {
   constructor(name, hash, iconClassName) {
@@ -14,11 +12,10 @@ class NavBarMenuItemComponent extends Component {
   createComponent() {
     this.root = <span className="button"><i className={this.iconClassName} style="padding-right:5px;"></i>{this.name}</span>;
 
-    this.root.onclick = (e) => {
+    this.root.onclick = () => {
       window.history.pushState(this.hash, this.name, '');
       window.location.hash = this.hash;
       NavBarMenuItemComponent.makeActive(this.root);
-      MasterPage.NavBarComponent.hideSidebar();
     };
   }
 
