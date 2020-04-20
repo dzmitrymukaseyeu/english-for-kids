@@ -34,7 +34,7 @@ class GameControllerComponent extends Component {
     }
 
     const sayPhraseTimeout = window.setTimeout(() => {
-      window.dispatchEvent(new CustomEvent('playSound', {
+      window.dispatchEvent(new CustomEvent('playCardSoundEvent', {
         detail: this.nextQuestion,
       }));
       clearTimeout(sayPhraseTimeout);
@@ -91,7 +91,7 @@ class GameControllerComponent extends Component {
       this.button.innerText = 'Reset';
     };
 
-    window.addEventListener('createResponse', (e) => {
+    window.addEventListener('createResponseEvent', (e) => {
       if (!this.isPlay) {
         return;
       }

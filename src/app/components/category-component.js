@@ -32,11 +32,11 @@ class CategoryComponent extends Component {
       }));
     };
 
-    window.addEventListener('gameMode', () => {
+    window.addEventListener('gameModeEnabledEvent', () => {
       this.root.style.border = '5px solid rgb(255, 176, 130)';
     });
 
-    window.addEventListener('trainMode', () => {
+    window.addEventListener('trainModeEnabledEvent', () => {
       this.root.style.border = '';
     });
   }

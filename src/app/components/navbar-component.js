@@ -7,7 +7,6 @@ class NavBarComponent extends Component {
 
     this.menuItems = [
       new NavBarMenuItem('Categories', 'categories', 'fas fa-list-ol'),
-
       new NavBarMenuItem('Action (set A)', 'actionA', 'fas fa-play'),
       new NavBarMenuItem('Action (set B)', 'actionB', 'fas fa-play'),
       new NavBarMenuItem('Action (set C)', 'actionC', 'fas fa-play'),
@@ -16,18 +15,10 @@ class NavBarComponent extends Component {
       new NavBarMenuItem('Animal (set B)', 'animalB', 'fas fa-play'),
       new NavBarMenuItem('Clothes', 'clothes', 'fas fa-play'),
       new NavBarMenuItem('Emotion', 'emotion', 'fas fa-play'),
-
       new NavBarMenuItem('Statistics', 'statistics', 'fas fa-address-card'),
     ];
 
     this.createComponent();
-  }
-
-  activateMenuItem(hash) {
-    const item = this.menuItems.find((p) => p.hash === hash);
-    if (item) {
-      item.makeActive();
-    }
   }
 
   toggleSidebar() {
@@ -119,9 +110,9 @@ class NavBarComponent extends Component {
 
     input.onchange = () => {
       if (input.checked) {
-        window.dispatchEvent(new Event('gameMode'));
+        window.dispatchEvent(new Event('gameModeEnabledEvent'));
       } else {
-        window.dispatchEvent(new Event('trainMode'));
+        window.dispatchEvent(new Event('trainModeEnabledEvent'));
       }
     };
 

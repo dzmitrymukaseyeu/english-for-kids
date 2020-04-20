@@ -88,12 +88,12 @@ class CardComponent extends Component {
       }
     });
 
-    window.addEventListener('gameMode', () => {
+    window.addEventListener('gameModeEnabledEvent', () => {
       text.style.visibility = 'hidden';
       image.style.height = '100%';
 
       image.onclick = () => {
-        window.dispatchEvent(new CustomEvent('createResponse', {
+        window.dispatchEvent(new CustomEvent('createResponseEvent', {
           detail: {
             hash: this.hash,
             name: this.name,
@@ -102,14 +102,14 @@ class CardComponent extends Component {
       };
     });
 
-    window.addEventListener('trainMode', () => {
+    window.addEventListener('trainModeEnabledEvent', () => {
       this.reset();
       text.style.visibility = 'visible';
       image.style.height = '80%';
       image.onclick = () => { this.sound.play(); };
     });
 
-    window.addEventListener('playSound', (e) => {
+    window.addEventListener('playCardSoundEvent', (e) => {
       if (e.detail === this.name) {
         this.sound.play();
       }
