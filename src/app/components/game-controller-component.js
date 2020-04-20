@@ -79,7 +79,6 @@ class GameControllerComponent extends Component {
     this.root = <div className="game-bar game-bar--hidden">
     </div>;
 
-
     // eslint-disable-next-line no-undef
     const sounds = importAll(require.context('../../public/audio', false, /\.(mp3)$/));
     this.correctSound = new Audio(sounds['correct.mp3']);

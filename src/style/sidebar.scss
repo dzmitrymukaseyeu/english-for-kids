@@ -1,20 +1,25 @@
+$sidebar-width:250px;
+$sidebar-min-height:600px;
+$sidebar-button-width:180px;
+$sidebar-button-height:40px;
+
 .sidebar {
   .sidebar__menu {
     z-index: 12;
-    width: 250px;
-    min-height: 600px;
+    width: $sidebar-width;
+    min-height: $sidebar-min-height;
     position: absolute;
     background: $basic-color;
     background: $background;
     border-right: 5px solid $accent-color;
-    height: calc(100vh - 60px);
+    height: calc(100vh);
     transition: all 0.3 ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     color: $menu-button-font-color;
 
-    .button {
+    .sidebar__button {
       padding-left: 5px;
       transition: all ease 0.2s;
       font-size: 100%;
@@ -23,10 +28,10 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      height: 40px;
+      height: $sidebar-button-height;
       border: 3px solid $menu-button-font-color;
       border-radius: 5px;
-      width: 180px;
+      width: $sidebar-button-width;
       margin-top: 5px;
 
       &:hover {
@@ -34,7 +39,7 @@
       }
     }
 
-    .button--active {
+    .sidebar__button--active {
       border: 3px solid $orange-font-color;
     }
 

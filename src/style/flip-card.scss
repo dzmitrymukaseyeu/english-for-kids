@@ -22,7 +22,7 @@
     color: $accent-font-color;
   }
 }
-/* переверните сторону при проведении мышью */
+
 .flip-card--rotate {
   transform: rotateY(180deg);
 }
@@ -36,7 +36,6 @@
   cursor: pointer;
 }
 
-/* здесь находится скорость перевертывания */
 .flip-card__flipper {
   transition: 0.6s;
   transform-style: preserve-3d;
@@ -44,7 +43,6 @@
   position: relative;
 }
 
-/* скройте обратную сторону во время переворота */
 .flip-card__front,
 .flip-card__back {
   transition: all 0.3s ease;
@@ -60,38 +58,30 @@
   }
 }
 
-/* лицевая сторона размещена над обратной */
 .flip-card__front {
   z-index: 2;
 }
 
-/* обратная, изначально скрытая сторона */
 .flip-card__back {
   transform: rotateY(180deg);
 }
 
 .flip-card--success::after
 {
-  position: absolute;
-  width: 240px;
-  height: 240px;
   background-image: url('../public/images/success.png');
-  background-size: 80%;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.8;
-  z-index: 9;
-  content: '';
-  cursor: default;
 }
 
+.flip-card--error::after
+{
+  background-image: url('../public/images/error.png');
+}
 
+.flip-card--success::after,
 .flip-card--error::after
 {
   position: absolute;
   width: 240px;
   height: 240px;
-  background-image: url('../public/images/error.png');
   background-size: 80%;
   background-repeat: no-repeat;
   background-position: center;

@@ -1,31 +1,26 @@
+$result-image-width:400px;
+$result-image-height:400px;
+$result-button-width:310px;
+$result-button-height:31px;
+
 .result-page {
-
   z-index: 15;
-
   margin-left: auto;
   margin-right: auto;
-
   position: absolute;
- 
   height: 100%;
   bottom: 0;
-  top:0;
+  top: 0;
   right: 0;
   left: 0;
-
-
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
   align-items: center;
 
-
   %result-page__image {
-    width:400px;
-    height: 400px;
-    
+    width:$result-image-width;
+    height: $result-image-height;
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -48,8 +43,8 @@
     transition: all 0.3s ease;
     cursor: pointer;
     user-select: none;
-    width:310px;
-    height: 31px;
+    width:$result-button-width;
+    height: $result-button-height;
     display:flex;
     justify-content: center;
     background: $background;
@@ -57,7 +52,6 @@
     font-size: 31px;
     padding:5px;
     border-radius: 5px;
-
     box-shadow: 0 0 10px gray;
 
     &:hover{

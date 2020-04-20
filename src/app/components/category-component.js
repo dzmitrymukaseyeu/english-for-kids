@@ -1,5 +1,4 @@
 import Component from '../specification/component';
-import MasterPage from '../pages/master-page';
 
 class CategoryComponent extends Component {
   constructor(name, hash, image) {
@@ -24,7 +23,13 @@ class CategoryComponent extends Component {
     this.root.onclick = () => {
       window.history.pushState(this.hash, this.name, '');
       window.location.hash = this.hash;
-      MasterPage.NavBarComponent.activateMenuItem(this.hash);
+
+      window.dispatchEvent(new CustomEvent('menuItemSelectedEvent', {
+        detail: {
+          hash: this.hash,
+          name: this.name,
+        },
+      }));
     };
 
     window.addEventListener('gameMode', () => {

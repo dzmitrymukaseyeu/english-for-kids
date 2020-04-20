@@ -26,7 +26,6 @@ class PageRenderer extends Component {
       new ResultPage('failure', 'result-page__image-failure'),
     ];
 
-    // service page
     this.NotFoundPage = new NotFoundPage();
 
     this.pages.push(this.NotFoundPage);

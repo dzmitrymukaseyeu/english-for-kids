@@ -1,5 +1,4 @@
 import Component from '../specification/component';
-// eslint-disable-next-line import/no-cycle
 import NavBarMenuItem from './navbar-menuitem-component';
 
 class NavBarComponent extends Component {
@@ -69,7 +68,7 @@ class NavBarComponent extends Component {
     // create root component
     this.header.appendChild(this.expandButton);
     this.header.appendChild(this.toggleSwitch);
-    this.header.appendChild(<div className="header__logo"></div>);
+    // this.header.appendChild(<div className="header__logo"></div>);
     this.root.appendChild(this.menu);
   }
 

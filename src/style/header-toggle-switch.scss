@@ -1,10 +1,11 @@
 //switch toggle
 
 $width: 50px;
-$padding: 7px;
+$padding: 5px;
 $height: $width / 2 + $padding;
 
 .toggle-switch {
+  padding-right:10px;
    display: flex;
    align-items: center;
   //toggle code begins!

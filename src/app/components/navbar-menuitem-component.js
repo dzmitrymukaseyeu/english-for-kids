@@ -10,13 +10,20 @@ class NavBarMenuItemComponent extends Component {
   }
 
   createComponent() {
-    this.root = <span className="button"><i className={this.iconClassName} style="padding-right:5px;"></i>{this.name}</span>;
+    this.root = <span className="sidebar__button"><i className={this.iconClassName} style="padding-right:5px;"></i>{this.name}</span>;
 
     this.root.onclick = () => {
       window.history.pushState(this.hash, this.name, '');
       window.location.hash = this.hash;
       NavBarMenuItemComponent.makeActive(this.root);
     };
+
+    window.addEventListener('menuItemSelectedEvent', (e) => {
+      if (e.detail.hash === this.hash
+          && e.detail.name === this.name) {
+        this.makeActive();
+      }
+    });
   }
 
   makeActive() {
@@ -25,10 +32,10 @@ class NavBarMenuItemComponent extends Component {
 
   static makeActive(button) {
     if (this.selectedButton) {
-      this.selectedButton.classList.remove('button--active');
+      this.selectedButton.classList.remove('sidebar__button--active');
     }
     this.selectedButton = button;
-    this.selectedButton.classList.add('button--active');
+    this.selectedButton.classList.add('sidebar__button--active');
   }
 }
 
