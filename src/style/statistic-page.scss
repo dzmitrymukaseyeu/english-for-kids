@@ -128,3 +128,32 @@
     }
   }
 }
+
+.stat-button-container{
+
+  display: flex;
+  padding-bottom: 20px;
+  justify-content: space-around;
+
+.stat-button
+  {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+    width:310px;
+    height: 31px;
+    display:flex;
+    justify-content: center;
+    background: $background;
+    color:$accent-font-color;
+    font-size: 31px;
+    padding:5px;
+    border-radius: 5px;
+
+    box-shadow: 0 0 10px gray;
+
+    &:hover{
+      box-shadow: 0 0 10px black;
+    }
+  } 
+}

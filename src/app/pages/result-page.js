@@ -16,12 +16,14 @@ class ResultPage extends MasterPage {
     window.location.hash = hash;
     localStorage.removeItem('errorCount');
 
-    window.dispatchEvent(new CustomEvent('trainModeClickEvent', {
+    window.dispatchEvent(new CustomEvent('menuItemSelectedEvent', {
       detail: {
         hash,
         name,
       },
     }));
+
+    window.dispatchEvent(new Event('trainModeEnabledEvent'));
   }
 
   render() {

@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable class-methods-use-this */
 import Component from '../specification/component';
 import Dictionary from '../dictionaries/dictionary';
 
@@ -50,9 +52,10 @@ class CategoryStatsComponent extends Component {
       Dictionary[key].forEach((item) => {
         const clickLog = clickLogs[`#${key}-${item.text}`] || { clickCount: 0, successCount: 0, failureCount: 0 };
 
-        const errorPercent = clickLog.successCount > 0 ? (parseInt(clickLog.failureCount, 10) / parseInt(clickLog.successCount, 10)*100) : 0;
-
-        console.log(errorPercent);
+        const errorPercent = clickLog.successCount > 0
+        // eslint-disable-next-line no-mixed-operators
+          ? (parseInt(clickLog.failureCount, 10) / parseInt(clickLog.successCount, 10))
+          : 0;
 
         const row = this.createRow(item.text, item.translate, clickLog.clickCount, clickLog.successCount, clickLog.failureCount, errorPercent);
         category.appendChild(row);
@@ -60,6 +63,58 @@ class CategoryStatsComponent extends Component {
 
       this.root.push(category);
     });
+
+    const resetButton = <div className="stat-button">Reset</div>;
+    const repeatButton = <div className="stat-button">Repeat difficult words</div>;
+
+    resetButton.onclick = () => {
+      localStorage.setItem('clickLogs', JSON.stringify({}));
+      
+      localStorage.setItem('specialPageDetail', JSON.stringify({}));
+
+      window.location.hash = '#statistics';
+      
+    };
+
+    repeatButton.onclick = () => {
+      const clickDate = Object.keys(clickLogs).map((p) => ({
+        category: p.split('-')[0].substr(1),
+        name: p.split('-')[1],
+        failureCount: clickLogs[p].failureCount,
+        successCount: clickLogs[p].successCount,
+      }));
+
+      const clickDateWithErrors = clickDate.filter((p) => p.failureCount > 0);
+
+      const result = clickDateWithErrors.map((p) => ({
+        category: p.category,
+        name: p.name,
+        failurePercent: p.failureCount / p.successCount,
+      }));
+
+      const sortedResult = result.sort((p) => p.failurePercent);
+
+      const proceedDictionary = [];
+
+      sortedResult.splice(0, 8).forEach((p) => {
+        const dictionary = Dictionary[p.category];
+        const card = dictionary.find((j) => j.text === p.name);
+        proceedDictionary.push(card);
+      });
+
+      localStorage.setItem('specialPageDetail', JSON.stringify({
+        dictionary: proceedDictionary,
+      }));
+
+      window.location.hash = '#repeat-difficult-words';
+    };
+
+    const container = <div className="stat-button-container">
+      {resetButton}
+      {repeatButton}
+    </div>;
+
+    this.root.push(container);
   }
 }
 

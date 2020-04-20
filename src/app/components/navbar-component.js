@@ -59,7 +59,6 @@ class NavBarComponent extends Component {
     // create root component
     this.header.appendChild(this.expandButton);
     this.header.appendChild(this.toggleSwitch);
-    // this.header.appendChild(<div className="header__logo"></div>);
     this.root.appendChild(this.menu);
   }
 
@@ -115,6 +114,10 @@ class NavBarComponent extends Component {
         window.dispatchEvent(new Event('trainModeEnabledEvent'));
       }
     };
+
+    window.addEventListener('trainModeEnabledEvent', () => {
+      input.checked = false;
+    });
 
     this.toggleSwitch.appendChild(toggleArea);
     toggleArea.appendChild(input);

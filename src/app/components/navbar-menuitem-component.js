@@ -16,6 +16,7 @@ class NavBarMenuItemComponent extends Component {
       window.history.pushState(this.hash, this.name, '');
       window.location.hash = this.hash;
       NavBarMenuItemComponent.makeActive(this.root);
+      window.dispatchEvent(new Event('trainModeEnabledEvent'));
     };
 
     window.addEventListener('menuItemSelectedEvent', (e) => {

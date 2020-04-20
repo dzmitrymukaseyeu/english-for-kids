@@ -30,6 +30,8 @@ class CategoryComponent extends Component {
           name: this.name,
         },
       }));
+
+      window.dispatchEvent(new Event('trainModeEnabledEvent'));
     };
 
     window.addEventListener('gameModeEnabledEvent', () => {

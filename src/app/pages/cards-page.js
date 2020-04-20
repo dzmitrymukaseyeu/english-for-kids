@@ -52,6 +52,26 @@ class CardsPage extends MasterPage {
     this.root.push(CardsPage.gameController.root);
   }
 
+
+  redrawPage() {
+    const rootIndex = this.root.indexOf(this.pageContent);
+
+    if (this.pageContent) {
+      this.pageContent.remove();
+    }
+
+    this.pageContent = <div className="page-content"></div>;
+
+    CardsPage.scoreComponent.hide();
+
+    this.dictionary.forEach((p) => {
+      this.pageContent.appendChild(new CardComponent(p.text,
+        this.images[p.image], p.translate, this.sounds[p.sound], this.hash).root);
+    });
+
+    this.root[rootIndex] = this.pageContent;
+  }
+
   preInitialize() {
     CardsPage.gameController.reset();
     CardsPage.gameController.initializeGameSession(this.dictionary, this.hash);

@@ -8,6 +8,10 @@ class ClickLoggerComponent extends Component {
 
   // eslint-disable-next-line class-methods-use-this
   logClickEvent(category, name) {
+    if (!localStorage.clickLogs) {
+      localStorage.setItem('clickLogs', JSON.stringify({}));
+    }
+
     const clickLogs = JSON.parse(localStorage.getItem('clickLogs'));
 
     let record = clickLogs[`${category}-${name}`];

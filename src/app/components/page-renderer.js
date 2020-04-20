@@ -5,6 +5,7 @@ import CardsPage from '../pages/cards-page';
 import Dictionary from '../dictionaries/dictionary';
 import ResultPage from '../pages/result-page';
 import StatsPage from '../pages/stats-page';
+import SpecialCardsPage from '../pages/special-cards-page';
 
 class PageRenderer extends Component {
   constructor() {
@@ -26,6 +27,7 @@ class PageRenderer extends Component {
       new ResultPage('success', 'result-page__image-success'),
       new ResultPage('failure', 'result-page__image-failure'),
       new StatsPage(),
+      new SpecialCardsPage(),
     ];
 
     this.NotFoundPage = new NotFoundPage();
