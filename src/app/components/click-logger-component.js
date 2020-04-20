@@ -12,19 +12,49 @@ class ClickLoggerComponent extends Component {
 
     let record = clickLogs[`${category}-${name}`];
 
-    if (record) {
-      record.clickCount += 1;
-    } else {
-      record = {
-        clickCount: 1,
-        failureCount: 0,
-        successCount: 0,
-      };
-
+    const save = () => {
       clickLogs[`${category}-${name}`] = record;
-    }
+      localStorage.setItem('clickLogs', JSON.stringify(clickLogs));
+    };
 
-    localStorage.setItem('clickLogs', JSON.stringify(clickLogs));
+    return {
+      logTrainModeClick: () => {
+        if (record) {
+          record.clickCount += 1;
+        } else {
+          record = {
+            clickCount: 1,
+            failureCount: 0,
+            successCount: 0,
+          };
+        }
+        save(record);
+      },
+      logSuccessClick: () => {
+        if (record) {
+          record.successCount += 1;
+        } else {
+          record = {
+            clickCount: 0,
+            failureCount: 0,
+            successCount: 1,
+          };
+        }
+        save(record);
+      },
+      logFailureClick: () => {
+        if (record) {
+          record.failureCount += 1;
+        } else {
+          record = {
+            clickCount: 0,
+            failureCount: 1,
+            successCount: 0,
+          };
+        }
+        save(record);
+      },
+    };
   }
 
   createComponent() {
@@ -33,15 +63,15 @@ class ClickLoggerComponent extends Component {
     }
 
     window.addEventListener('trainModeClickEvent', (e) => {
-      this.logClickEvent(e.detail.hash, e.detail.name);
+      this.logClickEvent(e.detail.hash, e.detail.name).logTrainModeClick();
     });
 
     window.addEventListener('trueAnswerEvent', (e) => {
-
+      this.logClickEvent(e.detail.hash, e.detail.name).logSuccessClick();
     });
 
     window.addEventListener('falseAnswerEvent', (e) => {
-
+      this.logClickEvent(e.detail.hash, e.detail.name).logFailureClick();
     });
   }
 }

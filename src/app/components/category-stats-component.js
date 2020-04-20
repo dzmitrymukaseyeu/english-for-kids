@@ -50,7 +50,9 @@ class CategoryStatsComponent extends Component {
       Dictionary[key].forEach((item) => {
         const clickLog = clickLogs[`#${key}-${item.text}`] || { clickCount: 0, successCount: 0, failureCount: 0 };
 
-        const errorPercent = clickLog.successCount > 0 ? Math.floor((parseInt(clickLog.failureCount, 10) / parseInt(clickLog.successCount, 10))) : 0;
+        const errorPercent = clickLog.successCount > 0 ? (parseInt(clickLog.failureCount, 10) / parseInt(clickLog.successCount, 10)*100) : 0;
+
+        console.log(errorPercent);
 
         const row = this.createRow(item.text, item.translate, clickLog.clickCount, clickLog.successCount, clickLog.failureCount, errorPercent);
         category.appendChild(row);
