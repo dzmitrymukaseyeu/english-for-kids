@@ -8,7 +8,8 @@ class StatsPage extends MasterPage {
     this.categoryStatComponent = new CategoryStatsComponent();
 
     window.addEventListener('statsComponentViewUpdated', () => {
-      this.preInitialize();
+      this.initializeRootContainer();
+      this.drawStateComponent();
 
       const appContainer = document.body.getElementsByClassName('app-container')[0];
 
@@ -18,7 +19,7 @@ class StatsPage extends MasterPage {
     });
   }
 
-  preInitialize() {
+  initializeRootContainer() {
     this.root.forEach((p) => {
       p.remove();
     });
@@ -26,7 +27,11 @@ class StatsPage extends MasterPage {
     this.root = [];
 
     super.render();
+  }
 
+  preInitialize() {
+    this.initializeRootContainer();
+    this.categoryStatComponent = new CategoryStatsComponent();
     this.drawStateComponent();
   }
 

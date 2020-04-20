@@ -29,10 +29,10 @@ class CategoryStatsComponent extends Component {
 
     return <div className="category-stat-header-row">
       <div className="category-stat__head">{`${word}`}  {createSortElement('alphabet', 'text')}</div>
-      <div className="category-stat__head">{`${translate}`}   {createSortElement('alphabet', 'translate')}</div>
+      <div className="category-stat__head">{`${translate}`}</div>
       <div className="category-stat__head"> {`${clicked}`}   {createSortElement('numeric', 'clickCount')}</div>
       <div className="category-stat__head">{`${guessed}`}   {createSortElement('numeric', 'successCount')}</div>
-      <div className="category-stat__head">{`${error}`}   {createSortElement('numeric', 'errorCount')}</div>
+      <div className="category-stat__head">{`${error}`}   {createSortElement('numeric', 'failureCount')}</div>
       <div className="category-stat__head">{`${errorPercent}`}   {createSortElement('numeric', 'errorPercent')}</div>
     </div>;
   }
@@ -75,17 +75,17 @@ class CategoryStatsComponent extends Component {
         isHeaderCreated = true;
       }
 
-      let categiesRows = [];
+      let categoriesRows = [];
 
       Dictionary[key].forEach((item) => {
         const clickLog = clickLogs[`#${key}-${item.text}`] || { clickCount: 0, successCount: 0, failureCount: 0 };
 
-        const errorPercent = clickLog.successCount > 0
+        const errorPercent = (clickLog.successCount > 0
           // eslint-disable-next-line no-mixed-operators
           ? (parseInt(clickLog.failureCount, 10) / parseInt(clickLog.successCount, 10))
-          : 0;
+          : 0) * 10;
 
-        categiesRows.push({
+        categoriesRows.push({
           text: item.text,
           translate: item.translate,
           clickCount: clickLog.clickCount,
@@ -97,21 +97,29 @@ class CategoryStatsComponent extends Component {
 
       if (this.sortField) {
         const comparer = (a, b) => {
+          if (this.sortType === 'numeric') {
+            a = parseInt(a[this.sortField], 10);
+            b = parseInt(b[this.sortField], 10);
+          } else {
+            a = a[this.sortField];
+            b = b[this.sortField];
+          }
 
-          if (a[this.sortField] < b[this.sortField]) {
+          if (a > b) {
+            return this.sortMode === 1 ? 1 : -1;
+          }
+
+          if (a < b) {
             return this.sortMode === 1 ? -1 : 1;
           }
 
-          if (a[this.sortField] > b[this.sortField]) {
-            return this.sortMode === 1 ? -1 : 1;
-          }
           return 0;
         };
 
-        categiesRows = categiesRows.sort(comparer);
+        categoriesRows = categoriesRows.sort(comparer);
       }
 
-      categiesRows.forEach((categoryRow) => {
+      categoriesRows.forEach((categoryRow) => {
         const row = this.createRow(categoryRow.text, categoryRow.translate, categoryRow.clickCount, categoryRow.successCount, categoryRow.failureCount, categoryRow.errorPercent);
         category.appendChild(row);
       });
@@ -127,7 +135,7 @@ class CategoryStatsComponent extends Component {
 
       localStorage.setItem('specialPageDetail', JSON.stringify({}));
 
-      window.location.hash = '#statistics';
+      window.location.reload();
     };
 
     repeatButton.onclick = () => {

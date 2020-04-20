@@ -6,12 +6,6 @@ class Dictionary {
   static initialize() {
     this.actionA = [
       {
-        text: 'open',
-        translate: 'открыть',
-        image: 'open.jpg',
-        sound: 'open.mp3',
-      },
-      {
         text: 'cry',
         translate: 'плакать',
         image: 'cry.jpg',
@@ -307,7 +301,7 @@ class Dictionary {
         text: 'dolphin',
         translate: 'дельфин',
         image: 'dolphin.jpg',
-        sound: 'dolphin',
+        sound: 'dolphin.mp3',
       },
     ];
     this.clothes = [
