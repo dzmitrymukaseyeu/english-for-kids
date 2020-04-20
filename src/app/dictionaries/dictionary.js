@@ -4,7 +4,7 @@ class Dictionary {
   }
 
   static initialize() {
-    this.setA = [
+    this.actionA = [
       {
         text: 'open',
         translate: 'открыть',
@@ -60,7 +60,7 @@ class Dictionary {
         sound: 'jump.mp3',
       },
     ];
-    this.setB = [
+    this.actionB = [
       {
         text: 'open',
         translate: 'открыть',
@@ -110,7 +110,7 @@ class Dictionary {
         sound: 'swim.mp3',
       },
     ];
-    this.setС = [
+    this.actionC = [
       {
         text: 'argue',
         translate: 'спорить',

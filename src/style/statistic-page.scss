@@ -1,0 +1,130 @@
+.category-stat {
+  min-width: 320px;
+  padding: 10px;
+  transition: all 0.3s ease;
+
+  .category-stat__head {
+    font-size: 24px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: all 0.3s ease;
+    border-right: 2px solid white;
+    text-align: center;
+    width:200px;
+    overflow: hidden;
+    border-bottom:2px solid white;
+  }
+
+  .category-stat__sorter
+  {
+    cursor: pointer;
+
+    &:hover{
+      color:$orange-font-color;
+    }
+  }
+
+  .category-stat__value {
+    font-size: 24px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: all 0.3s ease;
+    border-right: 1px solid gray;
+    text-align: center;
+    width:200px;
+    overflow: hidden;
+    border-bottom:1px solid gray;
+  }
+
+  .category-stat__name {
+    padding: 3px;
+    background: $background;
+    display: inline-flex;
+    color:white;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    
+  }
+
+  .category-stat-values-row {
+    background: $background;
+    display: flex;
+    justify-content: center;
+    min-width: 320px;
+    color:white;
+  }
+
+  .category-stat-header-row {
+    background: $background;
+    display: flex;
+    justify-content: center;
+    border-top-right-radius: 5px;
+    min-width: 320px;
+    color:white;
+  }
+
+  @media (min-width: 1025px) and (max-width: 1280px) {
+    .category-stat__name {
+      padding-left: 10px;
+    }
+
+    .category-stat__head,
+    .category-stat__value {
+      font-size: 24px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .category-stat__name {
+      padding-left: 5px;
+    }
+
+    .category-stat__head,
+    .category-stat__value {
+      font-size: 24px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .category-stat__name {
+      padding-left: 3px;
+    }
+
+    .category-stat__head,
+    .category-stat__value {
+      font-size: 24px;
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+  }
+
+  @media (min-width: 481px) and (max-width: 767px) {
+    .category-stat__name {
+      padding-left: 3px;
+    }
+
+    .category-stat__head,
+    .category-stat__value {
+      font-size: 14px;
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+  }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    .category-stat__name {
+      padding-left: 2px;
+    }
+
+    .category-stat__head,
+    .category-stat__value {
+      font-size: 14px;
+      padding-left: 2px;
+      padding-right: 2px;
+    }
+  }
+}

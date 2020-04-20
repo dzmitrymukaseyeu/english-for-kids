@@ -19,6 +19,8 @@ $sidebar-button-height:40px;
     align-items: center;
     color: $menu-button-font-color;
 
+    border-bottom-right-radius: 5px;
+
     .sidebar__button {
       padding-left: 5px;
       transition: all ease 0.2s;

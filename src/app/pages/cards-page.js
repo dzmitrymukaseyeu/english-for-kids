@@ -22,12 +22,12 @@ class CardsPage extends MasterPage {
 
     super.render();
 
-    window.addEventListener('gameMode', () => {
+    window.addEventListener('gameModeEnabledEvent', () => {
       CardsPage.gameController.show();
       CardsPage.scoreComponent.show();
     });
 
-    window.addEventListener('trainMode', () => {
+    window.addEventListener('trainModeEnabledEvent', () => {
       CardsPage.scoreComponent.hide();
       CardsPage.gameController.hide();
       CardsPage.scoreComponent.resetNodes();

@@ -17,6 +17,17 @@ class CardComponent extends Component {
     this.root.classList.remove('flip-card--error');
   }
 
+  imageClickHandler() {
+    this.sound.play();
+
+    window.dispatchEvent(new CustomEvent('trainModeClickEvent', {
+      detail: {
+        hash: this.hash,
+        name: this.name,
+      },
+    }));
+  }
+
   createComponent() {
     this.sound = new Audio(this.sound);
 
@@ -63,7 +74,7 @@ class CardComponent extends Component {
 
 
     image.onclick = () => {
-      this.sound.play();
+      this.imageClickHandler();
     };
 
     window.addEventListener('trueAnswerEvent', (e) => {
@@ -106,7 +117,9 @@ class CardComponent extends Component {
       this.reset();
       text.style.visibility = 'visible';
       image.style.height = '80%';
-      image.onclick = () => { this.sound.play(); };
+      image.onclick = () => {
+        this.imageClickHandler();
+      };
     });
 
     window.addEventListener('playCardSoundEvent', (e) => {

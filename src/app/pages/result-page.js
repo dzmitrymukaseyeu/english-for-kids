@@ -7,11 +7,21 @@ class ResultPage extends MasterPage {
     super.render();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   openHomePage() {
-    window.history.pushState('#categories', 'categories', '');
-    window.location.hash = '#categories';
-    MasterPage.NavBarComponent.activateMenuItem(this.hash);
+    const hash = '#categories';
+    const name = 'categories';
+
+    window.history.pushState(hash, name, '');
+    window.location.hash = hash;
     localStorage.removeItem('errorCount');
+
+    window.dispatchEvent(new CustomEvent('trainModeClickEvent', {
+      detail: {
+        hash,
+        name,
+      },
+    }));
   }
 
   render() {

@@ -4,6 +4,7 @@ import NotFoundPage from '../pages/notfound-page';
 import CardsPage from '../pages/cards-page';
 import Dictionary from '../dictionaries/dictionary';
 import ResultPage from '../pages/result-page';
+import StatsPage from '../pages/stats-page';
 
 class PageRenderer extends Component {
   constructor() {
@@ -14,9 +15,9 @@ class PageRenderer extends Component {
   createComponent() {
     this.pages = [
       new CategoriesPage(),
-      new CardsPage('actionA', Dictionary.setA),
-      new CardsPage('actionB', Dictionary.setB),
-      new CardsPage('actionC', Dictionary.setС),
+      new CardsPage('actionA', Dictionary.actionA),
+      new CardsPage('actionB', Dictionary.actionB),
+      new CardsPage('actionC', Dictionary.actionC),
       new CardsPage('adjective', Dictionary.adjective),
       new CardsPage('animalA', Dictionary.animalA),
       new CardsPage('animalB', Dictionary.animalB),
@@ -24,6 +25,7 @@ class PageRenderer extends Component {
       new CardsPage('emotion', Dictionary.emotion),
       new ResultPage('success', 'result-page__image-success'),
       new ResultPage('failure', 'result-page__image-failure'),
+      new StatsPage(),
     ];
 
     this.NotFoundPage = new NotFoundPage();
