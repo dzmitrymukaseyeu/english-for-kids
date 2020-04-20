@@ -5,6 +5,17 @@ class StatsPage extends MasterPage {
   constructor() {
     super('#statistics', false);
     super.render();
+    this.categoryStatComponent = new CategoryStatsComponent();
+
+    window.addEventListener('statsComponentViewUpdated', () => {
+      this.preInitialize();
+
+      const appContainer = document.body.getElementsByClassName('app-container')[0];
+
+      this.root.forEach((p) => {
+        appContainer.appendChild(p);
+      });
+    });
   }
 
   preInitialize() {
@@ -16,8 +27,10 @@ class StatsPage extends MasterPage {
 
     super.render();
 
-    this.categoryStatComponent = new CategoryStatsComponent();
+    this.drawStateComponent();
+  }
 
+  drawStateComponent() {
     this.categoryStatComponent.root.forEach((rootItem) => {
       this.root.push(rootItem);
     });

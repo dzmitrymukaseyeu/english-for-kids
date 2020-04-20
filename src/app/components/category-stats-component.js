@@ -7,16 +7,33 @@ class CategoryStatsComponent extends Component {
   constructor() {
     super();
     this.createComponent();
+    this.sortMode = 0;
+  }
+
+  setSortMode(type, mode, field) {
+    this.sortType = type;
+    this.sortMode = mode;
+    this.sortField = field;
   }
 
   createRowHeader(word, translate, clicked, guessed, error, errorPercent) {
+    const createSortElement = (type, field) => {
+      const element = <div style="display:inline"><span className="category-stat__sorter fas fa-sort"></span></div>;
+      element.onclick = () => {
+        this.setSortMode(type, (this.sortMode + 1) % 2, field);
+        this.createComponent();
+        window.dispatchEvent(new Event('statsComponentViewUpdated'));
+      };
+      return element;
+    };
+
     return <div className="category-stat-header-row">
-      <div className="category-stat__head">{`${word}`}  <span className="category-stat__sorter fas fa-sort"></span></div>
-      <div className="category-stat__head">{`${translate}`}  <span className="category-stat__sorter fas fa-sort"></span></div>
-      <div className="category-stat__head"> {`${clicked}`}  <span className="category-stat__sorter fas fa-sort"></span></div>
-      <div className="category-stat__head">{`${guessed}`}  <span className="category-stat__sorter fas fa-sort"></span></div>
-      <div className="category-stat__head">{`${error}`}  <span className="category-stat__sorter fas fa-sort"></span></div>
-      <div className="category-stat__head">{`${errorPercent}`}  <span className="category-stat__sorter fas fa-sort"></span></div>
+      <div className="category-stat__head">{`${word}`}  {createSortElement('alphabet', 'text')}</div>
+      <div className="category-stat__head">{`${translate}`}   {createSortElement('alphabet', 'translate')}</div>
+      <div className="category-stat__head"> {`${clicked}`}   {createSortElement('numeric', 'clickCount')}</div>
+      <div className="category-stat__head">{`${guessed}`}   {createSortElement('numeric', 'successCount')}</div>
+      <div className="category-stat__head">{`${error}`}   {createSortElement('numeric', 'errorCount')}</div>
+      <div className="category-stat__head">{`${errorPercent}`}   {createSortElement('numeric', 'errorPercent')}</div>
     </div>;
   }
 
@@ -38,26 +55,64 @@ class CategoryStatsComponent extends Component {
   }
 
   createComponent() {
+    if (this.root) {
+      this.root.forEach((p) => p.remove());
+    }
+
     this.root = [];
 
     const keys = Object.keys(Dictionary);
 
     const clickLogs = JSON.parse(localStorage.getItem('clickLogs') || '{}');
 
+    let isHeaderCreated = false;
+
     keys.forEach((key) => {
       const category = this.createCategory(key);
 
-      category.appendChild(this.createRowHeader('Word', 'Translate', 'Click count', 'Guessed', 'Error', 'Error %'));
+      if (!isHeaderCreated) {
+        category.appendChild(this.createRowHeader('Word', 'Translate', 'Click count', 'Guessed', 'Error', 'Error %'));
+        isHeaderCreated = true;
+      }
+
+      let categiesRows = [];
 
       Dictionary[key].forEach((item) => {
         const clickLog = clickLogs[`#${key}-${item.text}`] || { clickCount: 0, successCount: 0, failureCount: 0 };
 
         const errorPercent = clickLog.successCount > 0
-        // eslint-disable-next-line no-mixed-operators
+          // eslint-disable-next-line no-mixed-operators
           ? (parseInt(clickLog.failureCount, 10) / parseInt(clickLog.successCount, 10))
           : 0;
 
-        const row = this.createRow(item.text, item.translate, clickLog.clickCount, clickLog.successCount, clickLog.failureCount, errorPercent);
+        categiesRows.push({
+          text: item.text,
+          translate: item.translate,
+          clickCount: clickLog.clickCount,
+          successCount: clickLog.successCount,
+          failureCount: clickLog.failureCount,
+          errorPercent,
+        });
+      });
+
+      if (this.sortField) {
+        const comparer = (a, b) => {
+
+          if (a[this.sortField] < b[this.sortField]) {
+            return this.sortMode === 1 ? -1 : 1;
+          }
+
+          if (a[this.sortField] > b[this.sortField]) {
+            return this.sortMode === 1 ? -1 : 1;
+          }
+          return 0;
+        };
+
+        categiesRows = categiesRows.sort(comparer);
+      }
+
+      categiesRows.forEach((categoryRow) => {
+        const row = this.createRow(categoryRow.text, categoryRow.translate, categoryRow.clickCount, categoryRow.successCount, categoryRow.failureCount, categoryRow.errorPercent);
         category.appendChild(row);
       });
 
@@ -69,11 +124,10 @@ class CategoryStatsComponent extends Component {
 
     resetButton.onclick = () => {
       localStorage.setItem('clickLogs', JSON.stringify({}));
-      
+
       localStorage.setItem('specialPageDetail', JSON.stringify({}));
 
       window.location.hash = '#statistics';
-      
     };
 
     repeatButton.onclick = () => {

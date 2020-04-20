@@ -1,6 +1,6 @@
 class Component {
   constructor() {
-    this.root = <div>empty component</div>;
+    this.root = [];
   }
 
   // eslint-disable-next-line class-methods-use-this
