@@ -75,9 +75,15 @@ class GameControllerComponent extends Component {
 
   createComponent() {
     this.button = <div className="game-bar__button">Start Game</div>;
+    this.repeatButton = <div className="game-bar__button">Repeat</div>;
 
-    this.root = <div className="game-bar game-bar--hidden">
-    </div>;
+    this.repeatButton.onclick = () => {
+      window.dispatchEvent(new CustomEvent('playCardSoundEvent', {
+        detail: this.nextQuestion,
+      }));
+    };
+
+    this.root = <div className="game-bar game-bar--hidden"></div>;
 
     // eslint-disable-next-line no-undef
     const sounds = importAll(require.context('../../public/audio', false, /\.(mp3)$/));
@@ -85,6 +91,7 @@ class GameControllerComponent extends Component {
     this.errorSound = new Audio(sounds['error.mp3']);
 
     this.root.appendChild(this.button);
+    this.root.appendChild(this.repeatButton);
 
     this.button.onclick = () => {
       this.createGameSession();

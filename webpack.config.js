@@ -6,7 +6,7 @@ module.exports = {
   output: {
     path: `${__dirname}/dist`,
     filename: 'bundle.js',
-    publicPath: 'http://192.168.0.144:7700/',
+    // publicPath: 'http://192.168.0.144:7700/',
   },
   devtool: 'source-map',
   module: {
@@ -61,6 +61,6 @@ module.exports = {
     port: 7700,
     progress: true,
     watchContentBase: true,
-    host: '192.168.0.144'
+    // host: '192.168.0.144'
   },
 };
