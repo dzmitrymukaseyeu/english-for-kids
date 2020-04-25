@@ -45,10 +45,12 @@ class GameControllerComponent extends Component {
     if (this.errorCount === 0) {
       window.history.pushState('#success', 'success', '');
       window.location.hash = '#success';
+      this.succesSound.play();
     } else {
       localStorage.setItem('errorCount', this.errorCount);
       window.history.pushState('#failure', 'success', '');
       window.location.hash = '#failure';
+      this.failureSound.play();
     }
   }
 
@@ -89,6 +91,9 @@ class GameControllerComponent extends Component {
     const sounds = importAll(require.context('../../public/audio', false, /\.(mp3)$/));
     this.correctSound = new Audio(sounds['correct.mp3']);
     this.errorSound = new Audio(sounds['error.mp3']);
+    
+    this.succesSound = new Audio(sounds['success.mp3']);
+    this.failureSound = new Audio(sounds['failure.mp3']);
 
     this.root.appendChild(this.button);
     this.root.appendChild(this.repeatButton);
