@@ -22,16 +22,15 @@ class NavBarComponent extends Component {
   }
 
   showSidebar() {
+    this.menuContent.classList.remove('sidebar__menu--hide');
     this.menuContent.classList.add('sidebar__menu--show');
   }
 
   hideSidebar() {
-    this.menuContent.classList.remove('sidebar__menu--show');
-    this.menuContent.classList.add('sidebar__menu--hide');
-
-    this.menuContent.addEventListener('animationend', () => {
-      this.menuContent.classList.remove('sidebar__menu--hide');
-    });
+    if (this.menuContent.classList.contains('sidebar__menu--show')) {
+      this.menuContent.classList.remove('sidebar__menu--show');
+      this.menuContent.classList.add('sidebar__menu--hide');
+    }
   }
 
   createComponent() {
@@ -42,15 +41,13 @@ class NavBarComponent extends Component {
     this.createToggleSwitch();
 
     document.onclick = (e) => {
-      if (
-        (
-          e.target.classList.length > 0
-          && e.target.classList.contains('menu__toggle') === false
-          && e.target.classList.contains('menu__btn') === false
-          && e.target.classList.contains('hamburger-menu') === false)
+      if ((
+        e.target.classList.length > 0
+        && e.target.classList.contains('menu__toggle') === false
+        && e.target.classList.contains('menu__btn') === false
+        && e.target.classList.contains('hamburger-menu') === false)
       ) {
-        this.menuContent.classList.remove('sidebar__menu--show');
-        this.menuContent.classList.add('sidebar__menu--hide');
+        this.hideSidebar();
         this.expandButtonToggle.checked = false;
       }
     };
@@ -64,11 +61,16 @@ class NavBarComponent extends Component {
   createMenu() {
     this.menu = <div className="sidebar"></div>;
 
-    this.menuContent = <div className="sidebar__menu">
-    </div>;
+    this.menuContent = <div className="sidebar__menu"></div>;
 
     this.menuItems.forEach((item) => {
       this.menuContent.appendChild(item.root);
+    });
+
+    this.menuContent.addEventListener('animationend', () => {
+      if (this.menuContent.classList.contains('sidebar__menu--hide')) {
+        this.menuContent.classList.remove('sidebar__menu--hide');
+      }
     });
 
     this.menu.appendChild(this.menuContent);
