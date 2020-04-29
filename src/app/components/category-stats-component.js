@@ -80,10 +80,8 @@ class CategoryStatsComponent extends Component {
       Dictionary[key].forEach((item) => {
         const clickLog = clickLogs[`#${key}-${item.text}`] || { clickCount: 0, successCount: 0, failureCount: 0 };
 
-        const errorPercent = (clickLog.successCount > 0
-          // eslint-disable-next-line no-mixed-operators
-          ? (parseInt(clickLog.failureCount, 10) / parseInt(clickLog.successCount, 10))
-          : 0) * 10;
+        const errorPercent = (clickLog.successCount
+          ? parseInt(clickLog.failureCount, 10) / parseInt(clickLog.successCount, 10) : 0) * 10;
 
         categoriesRows.push({
           text: item.text,
@@ -158,6 +156,7 @@ class CategoryStatsComponent extends Component {
 
       const proceedDictionary = [];
 
+      // take first 8 cards
       sortedResult.splice(0, 8).forEach((p) => {
         const dictionary = Dictionary[p.category];
         const card = dictionary.find((j) => j.text === p.name);

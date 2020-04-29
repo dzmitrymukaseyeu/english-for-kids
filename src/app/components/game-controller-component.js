@@ -91,7 +91,7 @@ class GameControllerComponent extends Component {
     const sounds = importAll(require.context('../../public/audio', false, /\.(mp3)$/));
     this.correctSound = new Audio(sounds['correct.mp3']);
     this.errorSound = new Audio(sounds['error.mp3']);
-    
+
     this.succesSound = new Audio(sounds['success.mp3']);
     this.failureSound = new Audio(sounds['failure.mp3']);
 
@@ -104,12 +104,7 @@ class GameControllerComponent extends Component {
     };
 
     window.addEventListener('createResponseEvent', (e) => {
-      if (!this.isPlay) {
-        return;
-      }
-
-      // skip, if not category page
-      if (e.detail.hash !== this.hash) {
+      if (e.detail.hash !== this.hash && !this.isPlay) {
         return;
       }
 

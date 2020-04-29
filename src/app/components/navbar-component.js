@@ -43,9 +43,9 @@ class NavBarComponent extends Component {
     document.onclick = (e) => {
       if ((
         e.target.classList.length > 0
-        && e.target.classList.contains('menu__toggle') === false
-        && e.target.classList.contains('menu__btn') === false
-        && e.target.classList.contains('hamburger-menu') === false)
+        && e.target.classList.contains('menu__toggle')
+        && e.target.classList.contains('menu__btn')
+        && e.target.classList.contains('hamburger-menu'))
       ) {
         this.hideSidebar();
         this.expandButtonToggle.checked = false;

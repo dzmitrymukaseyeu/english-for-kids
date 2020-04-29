@@ -6,6 +6,7 @@ class ScoreComponent extends Component {
     this.createComponent();
     this.resetNodes();
     this.resetPoints();
+    this.maxScorePointCount = 8;
   }
 
   show() {
@@ -37,7 +38,7 @@ class ScoreComponent extends Component {
     this.root.appendChild(this.starContainer);
 
     window.addEventListener('trueAnswerEvent', () => {
-      if (this.starContainer.children.length > 8) {
+      if (this.starContainer.children.length > this.maxScorePointCount) {
         this.resetNodes();
       }
 
