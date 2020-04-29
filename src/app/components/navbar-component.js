@@ -21,17 +21,16 @@ class NavBarComponent extends Component {
     this.createComponent();
   }
 
-  toggleSidebar() {
-    if (this.menuContent.classList.contains('sidebar__menu--hide')) {
-      this.menuContent.classList.remove('sidebar__menu--hide');
-      this.menuContent.classList.add('sidebar__menu--show');
-    } else {
-      this.menuContent.classList.remove('sidebar__menu--show');
-      this.menuContent.classList.add('sidebar__menu--hide');
-    }
+  showSidebar() {
+    this.menuContent.classList.add('sidebar__menu--show');
+  }
+
+  hideSidebar() {
+    this.menuContent.classList.remove('sidebar__menu--show');
+    this.menuContent.classList.add('sidebar__menu--hide');
 
     this.menuContent.addEventListener('animationend', () => {
-      this.menuContent.classList.remove('sidebar__menu--show');
+      this.menuContent.classList.remove('sidebar__menu--hide');
     });
   }
 
@@ -65,7 +64,7 @@ class NavBarComponent extends Component {
   createMenu() {
     this.menu = <div className="sidebar"></div>;
 
-    this.menuContent = <div className="sidebar__menu sidebar__menu--hide">
+    this.menuContent = <div className="sidebar__menu">
     </div>;
 
     this.menuItems.forEach((item) => {
@@ -89,7 +88,11 @@ class NavBarComponent extends Component {
     this.expandButtonToggle = <input id="menu__toggle" type="checkbox"></input>;
 
     this.expandButtonToggle.onchange = () => {
-      this.toggleSidebar();
+      if (this.expandButtonToggle.checked) {
+        this.showSidebar();
+      } else {
+        this.hideSidebar();
+      }
     };
 
     const label = <label className="menu__btn"></label>;

@@ -18,7 +18,7 @@ $sidebar-button-height:40px;
     flex-direction: column;
     align-items: center;
     color: $menu-button-font-color;
-
+    margin-left: -255px;
     border-bottom-right-radius: 5px;
 
     .sidebar__button {
